@@ -17,7 +17,9 @@ loop do                                             # Server runs forever
 
   header = "HTTP/1.1 200 OK"
   time = Time.now.ctime
-  response = "#{header}\r\n\r\n#{time}"       # Output the HTTP header with current time to the client
+  filename = "index.html"
+  response = File.read(filename)
+      # Output the HTTP header with current time to the client
 
   client.puts(response)
 
