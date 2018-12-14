@@ -17,7 +17,13 @@ loop do                                             # Server runs forever
 
   header = "HTTP/1.1 200 OK"
   time = Time.now.ctime
-  filename = "index.html"
+  filename = lines[0].gsub(/GET \//, 'index.html').gsub(/\ HTTP.*/, '')
+
+  if File.exists?(filename)
+  response_body = File.read(filename)
+  else
+  response_body = "File Not Found\n" # need to indicate end of the string with \n
+  end
   response = File.read(filename)
       # Output the HTTP header with current time to the client
 
